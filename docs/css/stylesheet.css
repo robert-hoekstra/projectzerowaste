@@ -1,0 +1,10 @@
+path {
+    fill: #ccc;
+    stroke: #fff;
+    stroke-linejoin: round;
+  }
+
+
+  body{
+      background: red;
+  }

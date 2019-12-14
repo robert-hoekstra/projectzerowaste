@@ -2,7 +2,7 @@ async function importDataset() {
   const dataset = await d3.dsv(";", "dataset/selectie3.csv");
   const postcodeSet = await d3.dsv(";", "dataset/PC4_BUURTEN.csv");
   const sbiCollection = await d3.dsv(";", "dataset/sbi_codes.csv");
-  const test = await d3.json("dataset/PC4_BUURTEN.json");
+
   
   // remember the regular Object? it would convert keys to string
   // Map keeps the type, so these two are different:
@@ -11,7 +11,6 @@ async function importDataset() {
   console.log("postcode", postcodeSet);
   console.log("data UA", dataset);
   console.log("sbi", sbiCollection);
-  console.log(test)
 
 
 

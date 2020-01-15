@@ -1,20 +1,16 @@
 async function importDataset() {
   const dataset = await d3.dsv(";", "dataset/extraBedrijven.csv");
-  const postcodeCollection = await d3.dsv(";", "dataset/PC4_BUURTEN.csv");
   const sbiCollection = await d3.dsv(";", "dataset/sbi_codes.csv");
   const eventCollection = await d3.dsv(";", "dataset/events_amsterdam.csv");
-  const postcodeMap = await d3.json("dataset/PC4_BUURTENV2.json");
 
   
   // remember the regular Object? it would convert keys to string
   // Map keeps the type, so these two are different:
 
 
-  console.log("postcode", postcodeCollection);
   console.log("data UA", dataset);
   console.log("sbi", sbiCollection);
   console.log("events", eventCollection);
-  console.log("kaart", postcodeMap)
 
 
 
@@ -22,22 +18,25 @@ async function importDataset() {
   // test
 
 
+// Sectie om te kijken hoe ik door de dataset heen kan itereren. 
 
-  const headerNames = d3.keys(dataset[0]);
+  // const headerNames = d3.keys(dataset[0]);
 
-  const week = {
-    maandag: headerNames[14],
-    dinsdag: headerNames[15],
-    woensdag: headerNames[16],
-    donderdag: headerNames[17],
-    vrijdag: headerNames[18],
-    zaterdag: headerNames[19],
-    zondag: headerNames[20]
-  };
+  // const week = {
+  //   maandag: headerNames[14],
+  //   dinsdag: headerNames[15],
+  //   woensdag: headerNames[16],
+  //   donderdag: headerNames[17],
+  //   vrijdag: headerNames[18],
+  //   zaterdag: headerNames[19],
+  //   zondag: headerNames[20]
+  // };
+
+  // einde sectie
 
 
-  console.log(week);
 
+  // Uitrekenen wat er per week wordr verwerkt aan afval.
   dataset.forEach(element => {
     parseInt(element.ma);
     parseInt(element.di);
@@ -58,9 +57,11 @@ async function importDataset() {
 
 
     if (Number.isNaN(weekTotaal)) {
-      weekTotaal === 1;
+      weekTotaal === 0;
       return weekTotaal;
     }
+
+    console.log(weekTotaal);
 
     sbiCollection.forEach(element2 => {
       if (element.SBI === element2.Code){
@@ -77,7 +78,7 @@ async function importDataset() {
     // // wat voor soort bedrijf:
   //  console.log(element.ZAAKNAAM + " Geregistreerd in postcodegebied: " + element.POSTCODE + " " + " Verwerkt " + weekTotaal + " zakken afval per week" + " Het bedrijfstype is " + element.BEDRIJFSTYPE)
   });
-  renderChart(dataset)
+  renderChart(dataset, mapProjection)
 }
 
 
@@ -145,13 +146,13 @@ d3.json("dataset/geojson2.json", function(err, geojson) {
       let selectedPostalcode = geojson.properties.Postcode4
       let selectedSurface = geojson.properties.Opp_m2
 
-      function postcodecheck(parameter){
-        if (parameter === dataset.POSTCODE_NR){
-          console.log(dataset.POSTCODE_NR)
-        }
-      }
+      // function postcodecheck(parameter){
+      //   if (parameter === dataset.POSTCODE_NR){
+      //     console.log(dataset.POSTCODE_NR)
+      //   }
+      // }
 
-      postcodecheck(this)
+      // postcodecheck(this)
 
 
       d3.selectAll("path")

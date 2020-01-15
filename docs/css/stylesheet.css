@@ -90,3 +90,7 @@ div.tooltip {
    
 }
 
+
+.selectedPostalcode {
+    fill: red !important;
+}

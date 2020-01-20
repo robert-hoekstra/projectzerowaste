@@ -1,7 +1,7 @@
 async function importDataset() {
-  const dataset = await d3.dsv(";", "docs/dataset/extraBedrijven.csv");
-  const sbiCollection = await d3.dsv(";", "docs/dataset/sbi_codes.csv");
-  const eventCollection = await d3.dsv(";", "docs/dataset/events_amsterdam.csv");
+  const dataset = await d3.dsv(";", "../dataset/extraBedrijven.csv");
+  const sbiCollection = await d3.dsv(";", "../dataset/sbi_codes.csv");
+  const eventCollection = await d3.dsv(";", "../dataset/events_amsterdam.csv");
 
   let totalMonday = d3.nest()
   .key(function(d) {return d.POSTCODE_NR})

@@ -1,6 +1,6 @@
 async function importDataset() {
   const dataset = await d3.dsv(";", "../dataset/extraBedrijven.csv");
-  const sbiCollection = await d3.dsv(";", "na/dataset/sbi_codes.csv");
+  const sbiCollection = await d3.dsv(";", "../dataset/sbi_codes.csv");
   const eventCollection = await d3.dsv(";", "../dataset/events_amsterdam.csv");
 
   let totalMonday = d3.nest()

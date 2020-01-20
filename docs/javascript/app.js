@@ -3,6 +3,51 @@ async function importDataset() {
   const sbiCollection = await d3.dsv(";", "dataset/sbi_codes.csv");
   const eventCollection = await d3.dsv(";", "dataset/events_amsterdam.csv");
 
+  let totalMonday = d3.nest()
+  .key(function(d) {return d.POSTCODE_NR})
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.ma; }); })
+  .entries(dataset);
+
+  let totalTuesday = d3.nest()
+  .key(function(d) {return d.POSTCODE_NR})
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.di; }); })
+  .entries(dataset);
+
+  let totalWednesday = d3.nest()
+  .key(function(d) {return d.POSTCODE_NR})
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.wo; }); })
+  .entries(dataset);
+
+  let totalThursday = d3.nest()
+  .key(function(d) {return d.POSTCODE_NR})
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.do; }); })
+  .entries(dataset);
+
+  let totalFriday = d3.nest()
+  .key(function(d) {return d.POSTCODE_NR})
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.vr; }); })
+  .entries(dataset);
+
+  let totalSaturday = d3.nest()
+  .key(function(d) {return d.POSTCODE_NR})
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.za; }); })
+  .entries(dataset);
+
+  let totalSunday = d3.nest()
+  .key(function(d) {return d.POSTCODE_NR})
+  .rollup(function(v) { return d3.sum(v, function(d) { return d.zo; }); })
+  .entries(dataset);
+
+  console.log("monday", totalMonday)
+  console.log("tuesday", totalTuesday)
+  console.log("wednesday", totalWednesday)
+  console.log("thursday", totalThursday)
+  console.log("friday", totalFriday)
+  console.log("saturday", totalSaturday)
+  console.log("sunday", totalSunday)
+
+  
+
   // console.log("hallo", companyPostalList)
 
   // remember the regular Object? it would convert keys to string
@@ -136,7 +181,6 @@ function renderChart(data1, data2, data3) {
         let weeklyChampionTotal = 0;
         let weeklyChampion = "";
         let postalAreaTotalSelection = 0;
-        let totalMonday = 0;
 
         const companyPostalListTotal = d3
           .nest()
@@ -157,7 +201,8 @@ function renderChart(data1, data2, data3) {
           .rollup(function(v) {
             return {
               Total: d3.sum(v, function(d) {
-                return parseFloat(d.weekTotaal);
+                return parseFloat(d.weekTotaal)
+                
               })
             };
           })

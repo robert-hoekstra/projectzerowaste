@@ -1,5 +1,5 @@
 async function importDataset() {
-  const dataset = await d3.dsv(";", "../dataset/https://github.com/robert-hoekstra/projectzerowaste/blob/master/docs/dataset/extraBedrijven.csv");
+  const dataset = await d3.dsv(";", "https://github.com/robert-hoekstra/projectzerowaste/blob/master/docs/dataset/extraBedrijven.csv");
   const sbiCollection = await d3.dsv(";", "na/dataset/sbi_codes.csv");
   const eventCollection = await d3.dsv(";", "../dataset/events_amsterdam.csv");
 

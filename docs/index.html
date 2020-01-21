@@ -13,6 +13,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <script src="https://d3js.org/d3.v5.js"></script>  
         <script src="javascript/app.js"></script>
         <script src="https://d3js.org/d3-polygon.v1.min.js"></script>
@@ -26,7 +27,7 @@
         <section id="left">
             <nav>
                 <ul id="daySelection">
-                    <button>MA</button>
+                    <button onclick=console.log(dataset)>MA</button>
                     <button>DI</button>
                     <button>WO</button>
                     <button>DO</button>
@@ -36,8 +37,8 @@
                 </ul>
 
                 <ul id="eventSelection">
-                    <li>Evenementen</li>
-                    <li>Markten</li>
+                    <button>Evenementen</button>
+                    <button>Markten</button>
                 </ul>
             </nav>
             <section id="chart" id ="container" class="svg-container">
@@ -47,18 +48,23 @@
 
         <section id="right">
             <section>
-                <h2 id="selectedArea"> Titel hier...</h2>
+                <h2 id="selectedArea">Selecteer een gebied op de kaart</h2>
             </section>
-            <section>
-                <ul>
-                    <li id="postalcode"></li>
-                    <li id="surface"></li>
-                    <li id="postalAreaTotal"></li>
-                    <li id="postalAreaRatio"></li>
-                    <li id="companyCount"></li>
-                    <li id="weekChampion"></li>
-                    <li id="weekTotaal"></li>
+            <section id="information">
+                <h3>Details</h3>
+                <ul class="infoScreen">
+                    <li id=""><img src="/icons/pin.svg" alt="ja toch"><section id="postalcode">1234</section></li>
+                    <li id=""><img src="/icons/area.svg" alt="ja toch"><section id="surface">0 km2</section></li>
+                    <li id=""><img src="/icons/trash.svg" alt="ja toch"><section id="postalAreaTotal">0</section></li>
+                    <li id=""><img src="/icons/shop.svg" alt="ja toch"><section id="companyCount">0</section></li>
+                    <li id=""><img src="/icons/ratio.svg" alt="ja toch"><section id="postalAreaRatio">0</section></li>
                 </ul>
+                <h3>Highscore</h3>
+                    <ul class="infoScreen">
+                        <li id=""><img src="/icons/bad.svg" alt="ja toch"><section id="weekChampion">Selecteer een postcode gebied</section></li>
+                        <li id=""><img src="/icons/trash.svg" alt="ja toch"><section id="weekTotaal">0</section></li>
+                    </ul>
+
             </section>
             <section id="barchart">
                 

@@ -89,6 +89,38 @@ async function importDataset() {
     })
     .entries(dataset);
 
+  // console.log("monday", totalMonday)
+  // console.log("tuesday", totalTuesday)
+  // console.log("wednesday", totalWednesday)
+  // console.log("thursday", totalThursday)
+  // console.log("friday", totalFriday)
+  // console.log("saturday", totalSaturday)
+  // console.log("sunday", totalSunday)
+
+  // console.log("hallo", companyPostalList)
+
+  // console.log("data UA", dataset);
+  // console.log("sbi", sbiCollection);
+  // console.log("events", eventCollection);
+
+  // test
+
+  // Sectie om te kijken hoe ik door de dataset heen kan itereren.
+
+  // const headerNames = d3.keys(dataset[0]);
+
+  // const week = {
+  //   maandag: headerNames[14],
+  //   dinsdag: headerNames[15],
+  //   woensdag: headerNames[16],
+  //   donderdag: headerNames[17],
+  //   vrijdag: headerNames[18],
+  //   zaterdag: headerNames[19],
+  //   zondag: headerNames[20]
+  // };
+
+  // einde sectie
+
   //  Calculate total rubbish per week by combining all days together.
   dataset.forEach(element => {
     parseInt(element.ma);
@@ -119,6 +151,15 @@ async function importDataset() {
         element.BEDRIJFSTYPE = element2.Betekenis;
       }
     });
+
+    // console.log(element.POSTCODE_NR)
+
+    // dataset.forEach(element => {
+    //   if (selectedPostalcode === data.)
+    // })
+
+    // // wat voor soort bedrijf:
+    //  console.log(element.ZAAKNAAM + " Geregistreerd in postcodegebied: " + element.POSTCODE + " " + " Verwerkt " + weekTotaal + " zakken afval per week" + " Het bedrijfstype is " + element.BEDRIJFSTYPE)
   });
   // Render map with dataset
   renderChart(dataset);
@@ -147,7 +188,10 @@ function renderChart(data1, data2, data3) {
   var path = d3.geoPath().projection(projection);
   d3.json("dataset/geojson2.json", function(err, geojson) {
     projection.fitSize([width, height], geojson); // adjust the projection to the features
-    // svg.append("path").attr("d", path(geojson));
+    // svg.append("path").attr("d", path(geojson)); // draw the
+
+    // features section
+    console.log(geojson.features);
     // Draw all the areas as individuel components in the map.
     svg
       .selectAll("path")
@@ -157,7 +201,7 @@ function renderChart(data1, data2, data3) {
       .attr("d", path)
       .style("stroke", "#fff")
       .style("stroke-width", "1")
-      .style("fill", "#002566")
+      .style("fill", "red")
       .on("mouseover", function(geojson) {
         div
           .transition()
@@ -174,7 +218,7 @@ function renderChart(data1, data2, data3) {
 
         d3.select(this)
           .attr("d", path)
-          .style("fill", "#00348d")
+          .style("fill", "red")
           .style("fill-opacity", "1");
       })
       //Add functionality to write information to right section and give feedback to user which area is selected.
@@ -185,8 +229,7 @@ function renderChart(data1, data2, data3) {
         let weeklyChampionTotal = 0;
         let weeklyChampion = "";
         let postalAreaTotalSelection = 0;
-
-// Total of companies per postal area
+ 
         const companyPostalListTotal = d3
           .nest()
           .key(function(data1) {
@@ -196,6 +239,7 @@ function renderChart(data1, data2, data3) {
             return v.length;
           })
           .entries(data1);
+        // console.log(companyPostalListTotal);
         // calculate amount of total rubbish for postal area
         const postalAreaTotal = d3
           .nest()
@@ -210,6 +254,7 @@ function renderChart(data1, data2, data3) {
             };
           })
           .entries(data1);
+        console.log("new", postalAreaTotal);
 
         // Select companies that shares selected postalcode, retrieve company and return.
         companyPostalListTotal.forEach(element => {
@@ -225,6 +270,7 @@ function renderChart(data1, data2, data3) {
               weeklyChampionTotal = element.weekTotaal;
               weeklyChampion = element.ZAAKNAAM;
             }
+            // weeklyChampionTotal = element.weekTotaal
           }
           return;
         });
@@ -235,6 +281,16 @@ function renderChart(data1, data2, data3) {
           return;
         });
 
+        console.log(postalAreaTotalSelection);
+
+        // function postcodecheck(parameter){
+        //   if (parameter === dataset.POSTCODE_NR){
+        //     console.log(dataset.POSTCODE_NR)
+        //   }
+        // }
+
+        // postcodecheck(this)
+
         d3.selectAll("path")
           .classed("selectedPostalcode", false)
           .attr("d", path)
@@ -244,32 +300,37 @@ function renderChart(data1, data2, data3) {
         d3.select(this)
           .classed("selectedPostalcode", true)
           .attr("d", path)
-          .style("fill", "#f5f5f5")
+          .style("fill", "red")
           .style("fill-opacity", "1");
 
         d3.select("#selectedArea").text(
           "Je hebt postcode " + selectedPostalcode + " geselecteerd"
         );
-        d3.select("#postalcode").text(
-          selectedPostalcode);
+        d3.select("#postalcode").text("Postcodegebied: " + selectedPostalcode);
         d3.select("#surface").text(
           (selectedSurface / 1000000).toFixed(3) + " km2"
         );
         d3.select("#postalAreaRatio").text(
-            ((selectedSurface / (postalAreaTotalSelection.Total / selection))/1000000).toFixed(
-              3
+          "De ratio van dit gebied is: " +
+            (selectedSurface / postalAreaTotalSelection.Total / 10000).toFixed(
+              1
             )
         );
         d3.select("#postalAreaTotal").text(
-          postalAreaTotalSelection.Total
+          "Het totaal aantal vuil deze week: " + postalAreaTotalSelection.Total
         );
         d3.select("#companyCount").text(
-          selection
+          "Er bevinding zich " + selection + " bedrijven in dit gebied"
         );
-        d3.select("#weekChampion").text(weeklyChampion);
+        d3.select("#weekChampion").text("De boosdoener is " + weeklyChampion);
         d3.select("#weekTotaal").text(
-          weeklyChampionTotal
+          "Met een verbruik van " + weeklyChampionTotal
         );
+
+        console.log(weeklyChampionTotal);
+
+        console.log(geojson.properties.Postcode4);
+
         // load bar that will display top 10
         renderBar(geojson.properties.Postcode4);
       })
@@ -304,47 +365,51 @@ function renderChart(data1, data2, data3) {
 //     .padding(0.1);
 //   const y = d3.scaleLinear().range([height, 0]);
 
-// append the svg object to the body of the page
-// append a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
-// var svg = d3.select("#barchart")
-//     .append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .append("g")
-//     .attr("transform",
-//           "translate(" + margin.left + "," + margin.top + ")");
 
-// get the data
-// d3.dsv(";", "dataset/test.csv"), function(error, data) {
-//   if (error) throw error;
 
-//   // format the data
-//   data.forEach(function(d) {
-//     d.sales = +d.sales;
-//   });
+  // append the svg object to the body of the page
+  // append a 'group' element to 'svg'
+  // moves the 'group' element to the top left margin
+  // var svg = d3.select("#barchart")
+  //     .append("svg")
+  //     .attr("width", width + margin.left + margin.right)
+  //     .attr("height", height + margin.top + margin.bottom)
+  //     .append("g")
+  //     .attr("transform",
+  //           "translate(" + margin.left + "," + margin.top + ")");
 
-//   // Scale the range of the data in the domains
-//   x.domain(data.map(function(d) { return d.salesperson; }));
-//   y.domain([0, d3.max(data, function(d) { return d.sales; })]);
+  // get the data
+  // d3.dsv(";", "dataset/test.csv"), function(error, data) {
+  //   if (error) throw error;
 
-//   // append the rectangles for the bar chart
-//   svg.selectAll(".bar")
-//       .data(data)
-//     .enter().append("rect")
-//       .attr("class", "bar")
-//       .attr("x", function(d) { return x(d.salesperson); })
-//       .attr("width", x.bandwidth())
-//       .attr("y", function(d) { return y(d.sales); })
-//       .attr("height", function(d) { return height - y(d.sales); });
+  //   console.log("dit is", data)
 
-//   // add the x Axis
-//   svg.append("g")
-//       .attr("transform", "translate(0," + height + ")")
-//       .call(d3.axisBottom(x));
+  //   // format the data
+  //   data.forEach(function(d) {
+  //     d.sales = +d.sales;
+  //   });
 
-//   // add the y Axis
-//   svg.append("g")
-//       .call(d3.axisLeft(y));
+  //   // Scale the range of the data in the domains
+  //   x.domain(data.map(function(d) { return d.salesperson; }));
+  //   y.domain([0, d3.max(data, function(d) { return d.sales; })]);
 
-// }
+  //   // append the rectangles for the bar chart
+  //   svg.selectAll(".bar")
+  //       .data(data)
+  //     .enter().append("rect")
+  //       .attr("class", "bar")
+  //       .attr("x", function(d) { return x(d.salesperson); })
+  //       .attr("width", x.bandwidth())
+  //       .attr("y", function(d) { return y(d.sales); })
+  //       .attr("height", function(d) { return height - y(d.sales); });
+
+  //   // add the x Axis
+  //   svg.append("g")
+  //       .attr("transform", "translate(0," + height + ")")
+  //       .call(d3.axisBottom(x));
+
+  //   // add the y Axis
+  //   svg.append("g")
+  //       .call(d3.axisLeft(y));
+
+  // }

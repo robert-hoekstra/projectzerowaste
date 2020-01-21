@@ -18,6 +18,35 @@ Click on an area to learn more about the top ten companies that are based in tha
 
 Get to know the details of the company. The application provides a lot of information about the #1 company!
 
+## Getting Started
+
+### Live Demo
+Follow the GitHub Pages link at the top of this repository.
+
+* Select an area to learn more about.
+
+By clicking on an area you get more details about that specific area
+
+**Note to user:**  Some features are yet to be implemented.
+
+### Local Demo
+
+* 1. Clone this repo
+* 2. Navigate to the docs folder
+* 3. Open index.html on a localhost.
+
+I use the Live Server Extension in Visual Studio Code
+But you can use whatever you prefer to run a localhost!
+
+
+### Change Data to your own!
+It is possible to run the application with your own data!
+
+* Put your csv or json files in the datasets folder within the docs folder.
+* Rename your files exactly to the once already in the folder and replace them.
+
+
+
 ## Features
 The application contains a lot of information based on a given dataset.
 

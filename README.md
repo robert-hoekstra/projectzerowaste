@@ -1,5 +1,5 @@
 # projectzerowaste
-College project for visualizing waste data in Amsterdam.e
+College project for visualizing waste data in Amsterdam
 
 ## Members
 Oemar, Stella & Robert
@@ -14,9 +14,31 @@ The dashboard comes with a detailed postalcode area map of Amsterdam and a dates
 The user chooses a date and the dashboard will show the waste that was produced within each postalcode area on that given day.
 More rubbish means a darker color of the spectrum and vice versa.
 
-Click on an area to learn more about the top ten companies that are based in that area.
+Click on an area to learn more about the top ten companies that are based in that area!
 
 Get to know the details of the company. The application provides a lot of information about the #1 company!
+
+## Features
+The application contains a lot of information based on a given dataset.
+
+* Tooltip
+  - An interactive way to discover the postal area and rubbish per postal area.
+
+* Day Selector
+  - Select any day of your likings. The tooltip will display the proper data the postal area. The data being displayed is the total amount of rubbish produced on that specific day.
+  
+* Postal Area Selection
+  - The surface of the area in square kilometres
+  - Total amount of rubbish for the whole week
+  - Ratio of the amount of rubbish. (Surface / (Rubbish / Companies))
+  - The amount of companies in the selected area
+  - The company with the highest amount of rubbish
+  
+* Future Updates
+  - Postal Area's being colored in based on the amount of rubbish it contains compared to the other area's. This way you can easily see if a area is interesting or not.
+  - Add functionality of the Evenementen en Markten buttons. Display which area contain an event.
+  - When you select a day the map get's refilled with the proper colors. Part of the first nice to have feature.
+  - Top 10 companies displayed in a bar chart.
 
 
 ## Resources

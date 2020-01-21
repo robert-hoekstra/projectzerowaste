@@ -42,8 +42,8 @@ The application contains a lot of information based on a given dataset.
 
 
 ## Resources
-[D3.js](https://d3js.org/)
-[Amsterdam Open Data](https://maps.amsterdam.nl/open_geodata)
+* [D3.js](https://d3js.org/)
+* [Amsterdam Open Data](https://maps.amsterdam.nl/open_geodata)
 
 ## Disclaimer
 The data provided on this git is fake and made up. However you can insert any of your local files to the program once you cloned the repo!

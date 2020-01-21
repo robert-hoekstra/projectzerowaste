@@ -3,6 +3,9 @@ async function importDataset() {
   const sbiCollection = await d3.dsv(";", "dataset/sbi_codes.csv");
   const eventCollection = await d3.dsv(";", "dataset/events_amsterdam.csv");
 
+
+
+
   // Calculate totals for every postal area based on days (monday, tuesday, wednesday, thursday, friday, saturday, sunday)
 
   let totalMonday = d3
@@ -89,6 +92,11 @@ async function importDataset() {
     })
     .entries(dataset);
 
+    let collectionTotal = [totalMonday, totalTuesday, totalWednesday, totalThursday, totalFriday, totalSaturday, totalSunday]
+    console.log(collectionTotal)
+
+    document.getElementById("events").addEventListener('click', function()
+    { console.log(eventCollection) })
   //  Calculate total rubbish per week by combining all days together.
   dataset.forEach(element => {
     parseInt(element.ma);
@@ -121,7 +129,7 @@ async function importDataset() {
     });
   });
   // Render map with dataset
-  renderChart(dataset);
+  renderChart(dataset, collectionTotal);
 }
 // End of async function to continue with chaining of d3 methods.
 importDataset();
@@ -164,7 +172,7 @@ function renderChart(data1, data2, data3) {
           .duration(200)
           .style("opacity", 0.9);
         div
-          .text(geojson.properties.Postcode4) // Add the selected postalarea to tiptool
+          .text(geojson.properties.Postcode4)  // Add the selected postalarea to tiptool
           .style("left", d3.event.pageX + "px")
           .style("top", d3.event.pageY - 28 + "px");
 
@@ -271,7 +279,7 @@ function renderChart(data1, data2, data3) {
           weeklyChampionTotal
         );
         // load bar that will display top 10
-        renderBar(geojson.properties.Postcode4);
+        // renderBar(geojson.properties.Postcode4);
       })
 
       // fade out tooltip on mouse out

@@ -256,8 +256,8 @@ function renderChart(data1, data2, data3) {
           (selectedSurface / 1000000).toFixed(3) + " km2"
         );
         d3.select("#postalAreaRatio").text(
-            ((selectedSurface / (postalAreaTotalSelection.Total / selection))/1000000).toFixed(
-              3
+            (((selectedSurface / (selection) )/ postalAreaTotalSelection.Total)/1000).toFixed(
+              2
             )
         );
         d3.select("#postalAreaTotal").text(

@@ -1,5 +1,6 @@
 # projectzerowaste
 College project for visualizing waste data in Amsterdam
+[![Image from Gyazo](https://i.gyazo.com/aba2b9f0a2fb212a468a744506d27235.png)](https://gyazo.com/aba2b9f0a2fb212a468a744506d27235)
 
 ## Members
 Oemar, Stella & Robert
@@ -10,11 +11,13 @@ The concept op the zero waste project is to visualize a given dataset. We combin
 We aim to create a dashboard that provides new insights to the waste problem in Amsterdam. The dashboard will read and present data in a way the user wants it to.
 
 The dashboard comes with a detailed postalcode area map of Amsterdam and a dateselector.
+[![Image from Gyazo](https://i.gyazo.com/48ba2f4dec022a768866bf534eb6c27c.gif)](https://gyazo.com/48ba2f4dec022a768866bf534eb6c27c)
 
 The user chooses a date and the dashboard will show the waste that was produced within each postalcode area on that given day.
 More rubbish means a darker color of the spectrum and vice versa.
 
 Click on an area to learn more about the top ten companies that are based in that area!
+[![Image from Gyazo](https://i.gyazo.com/fc6a52718231edc45ce19660449abcfb.gif)](https://gyazo.com/fc6a52718231edc45ce19660449abcfb)
 
 Get to know the details of the company. The application provides a lot of information about the #1 company!
 
